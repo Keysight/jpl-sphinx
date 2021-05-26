@@ -1,0 +1,4 @@
+Sphinx==4.0.2
+sphinx-argparse==0.2.5
+sphinx-rtd-theme==0.5.2
+readthedocs-sphinx-search==0.1.0rc3
