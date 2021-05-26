@@ -1,4 +1,3 @@
 Introduction
 ============
-
-hello world!
+hello scott!
