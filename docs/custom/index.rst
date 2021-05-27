@@ -2,6 +2,7 @@ Custom Guides
 =============
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    helloWorld.rst
+   getting_started.rst

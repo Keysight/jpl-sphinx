@@ -6,7 +6,7 @@
 JPL-Sphinx
 ====================================================================
 
-Version 1.0.3
+Version 1.0.4
 
 .. image:: _static/raster/gradient-200x200.png
 .. image:: _static/vector/logos.svg
@@ -17,6 +17,7 @@ Version 1.0.3
 
    resources/scripts/modules.rst
    custom/index.rst
+   custom/getting_started.rst
 
 Indices and tables
 ==================
