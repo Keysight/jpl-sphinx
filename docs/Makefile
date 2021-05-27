@@ -5,9 +5,6 @@
 # from the environment for the first two.
 SPHINXOPTS      ?=
 SPHINXBUILD     ?= sphinx-build
-SPHINXAPIDOC    ?= sphinx-apidoc
-SCRIPTSDIR      = ../resources/scripts
-SCRIPTS_RST_DIR = moduleRst
 SOURCEDIR       = .
 BUILDDIR        = _build
 
@@ -20,6 +17,4 @@ help:
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-	rm -fR $(SCRIPTS_RST_DIR)
-	@$(SPHINXAPIDOC) -o "$(SCRIPTS_RST_DIR)" "$(SCRIPTSDIR)"
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

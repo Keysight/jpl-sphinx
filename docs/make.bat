@@ -7,12 +7,7 @@ REM Command file for Sphinx documentation
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
-if "%SPHINXAPIDOC%" == "" (
-	set SPHINXAPIDOC=sphinx-apidoc
-)
 set SOURCEDIR=.
-set SCRIPTDIR=..\resources\scripts
-set SCRIPTRSTDIR=moduleRst
 set BUILDDIR=_build
 
 if "%1" == "" goto help
@@ -30,8 +25,6 @@ if errorlevel 9009 (
 	exit /b 1
 )
 
-powershell.exe Remove-Item %SCRIPTRSTDIR% -Recurse -Force
-%SPHINXAPIDOC% -o %SCRIPTRSTDIR% %SCRIPTDIR%
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 goto end
 
