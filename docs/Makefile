@@ -21,5 +21,5 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	rm -fR $(SCRIPTS_RST_DIR)
-	@$(SPHINXAPIDOC) -o moduleRst "$(BUILDDIR)/$(SCRIPTSDIR)"
+	@$(SPHINXAPIDOC) -o "$(SCRIPTS_RST_DIR)" "$(SCRIPTSDIR)"
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
