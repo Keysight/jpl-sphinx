@@ -2,8 +2,8 @@ scripts
 =======
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 4
 
+   hi_rachel
    show_host_info
    simpleble
-   hi_rachel

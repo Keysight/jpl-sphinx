@@ -1,6 +1,6 @@
 Set-Location "docs"
 Remove-Item "html" -Recurse -Force
-Remove-Item "moduleRst\show_host_info.rst"
-sphinx-apidoc -o "moduleRst" ..\resources\scripts
+Remove-Item "resources\scripts" -Recurse
+sphinx-apidoc -o "resources\scripts" "..\resources\scripts"
 sphinx-build -b html . "html"
 Set-Location ".."
