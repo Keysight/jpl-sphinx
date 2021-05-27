@@ -1,4 +1,4 @@
-hi\_rachel module
+hi\_rachel.py
 =================
 
 .. automodule:: hi_rachel
