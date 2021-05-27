@@ -6,9 +6,10 @@
 JPL-Sphinx
 ====================================================================
 
-Version 1.0.2
+Version 1.0.3
 
 .. image:: _static/raster/gradient-200x200.png
+.. image:: _static/vector/logos.svg
 
 .. toctree::
    :maxdepth: 2
