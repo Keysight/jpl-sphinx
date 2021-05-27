@@ -3,7 +3,7 @@ Introduction
 
 hello rachel!
 
-.. image:: afrog.jpeg
+.. image:: https://cdn.britannica.com/s:800x1000/84/206384-050-00698723/Javan-gliding-tree-frog.jpg
   :width: 400
   :alt: Alternative text: this is a frog
 
