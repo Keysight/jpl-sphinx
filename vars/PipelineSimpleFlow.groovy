@@ -23,17 +23,26 @@ def call(body)
         {
             stage('Checkout')
             {
-                echo 'would checkout.'
+                steps
+                {
+                    echo 'would checkout.'
+                }
             }
 
             stage('Get Host Info')
             {
-                ShowHostInfo()
+                steps
+                {
+                    ShowHostInfo()
+                }
             }
 
             stage('Finalize')
             {
-                echo 'I am done.'
+                steps
+                {
+                    echo 'I am done.'
+                }
             }
         }
     }
