@@ -3,6 +3,7 @@ Introduction
 
 hello rachel!
 
+.. image:: _static/raster/gradient-200x200.png
 .. image:: custom/afrog.jpeg
   :width: 400
   :alt: Alternative text: this is a frog
