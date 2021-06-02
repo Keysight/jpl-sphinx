@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""show_host_info.py
+"""
+.. _header1:
+.. _header2:
+show_host_info.py
 
 Introduction
 ------------
@@ -14,6 +17,8 @@ Usage:
    :func: get_argument_parser
    :prog: show_host_info
 """
+.. _header3:
+.. _header4:
 import argparse
 import logging
 import platform
