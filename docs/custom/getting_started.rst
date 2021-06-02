@@ -13,15 +13,22 @@ See the **show_host_info** script. (it should link to the module documentation)
 
 :ref:`The Second Section of Getting Started` This link indicates that the autosectionlabel extension in conf.py is working
 
-target1_ also links to Second Section of Getting Started using implicit hyperlinks (not sphinx autosectionlabel)
+target1_ should link to Second Section of Getting Started using implicit hyperlinks (not sphinx autosectionlabel)
 
-:ref:`Links to 3rd Section of Getting Started<The Third Section of Getting Started>`
+:ref:`Links to 3rd Section of Getting Started<The Third Section of Getting Started>` using custom link and sphinx autosectionlabel
 
 
 ..
      link from text to a heading in any other part of the document by using the :ref: command with the heading text as the parameter
 
 See the **get_ip_addresses** method in the **show_host_info** script.  (should also link)
+
+"""
+    See docstring of :py:meth:`bar() <XYZ.bar>` in :py:mod:`module_2`.
+"""
+:py:mod:`show_host_info`
+
+:py:meth:`get_argument_parser() <show_host_info.get_argument_parser>`
 
 See the **ShowHostInfo** step (should link)
 

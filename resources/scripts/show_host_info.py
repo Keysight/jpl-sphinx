@@ -17,8 +17,7 @@ Usage:
    :func: get_argument_parser
    :prog: show_host_info
 """
-.. _header3:
-.. _header4:
+
 import argparse
 import logging
 import platform
