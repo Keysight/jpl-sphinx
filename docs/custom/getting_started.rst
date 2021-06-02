@@ -10,7 +10,8 @@ See the :ref:'header1' script. (it should link to the module documentation)
 
 :ref:'Second header custom4<header4>' 
 
-:ref:'The Second Section of Getting Started'
+:ref:'The Second Section of Getting Started'_ This link indicates that the autosectionlabel extension in conf.py is working
+target1_ also links to Second Section of Getting Started
 
 :ref:'Links to 3rd Section of Getting Started<The Third Section of Getting Started>'
 
@@ -22,10 +23,10 @@ See the **get_ip_addresses** method in the **show_host_info** script.  (should a
 
 See the **ShowHostInfo** step (should link)
 
-
+.. _target1:
 The Second Section of Getting Started
 =====================================
-This section is used to test if links within the same section are working
+This section is used to test if links within the same section are working. 
 
 The Third Section of Getting Started
 ====================================
