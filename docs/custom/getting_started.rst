@@ -3,7 +3,9 @@ Link Testing Playground
 =======================
 
 **Using :ref: keyword in autosectionlabel**
+
 reStructuredText
+
 .. note::
     :ref:`The Second Section of Getting Started` This link indicates that the autosectionlabel extension in conf.py is working
 
@@ -11,7 +13,9 @@ rendered text
     :ref:`The Second Section of Getting Started` This link indicates that the autosectionlabel extension in conf.py is working    
 
 **Use of targets for implicit hyperlinking**
+
 reStructuredText
+
 .. note::
     target1_ should link to Second Section of Getting Started using implicit hyperlinking (is feature of restructure text, not sphinx autosectionlabel) if target1 is correctly defined in the second section
 
@@ -19,7 +23,9 @@ rendered text
     target1_ should link to Second Section of Getting Started using implicit hyperlinking (is feature of restructure text, not sphinx autosectionlabel) if target1 is correctly defined in the second section
 
 **Using custome links and autosectionlabel :ref:** 
+
 reStructuredText
+
 .. note::
     :ref:`Links to 3rd Section of Getting Started<The Third Section of Getting Started>` using custom link and sphinx autosectionlabel
 
@@ -27,7 +33,9 @@ rendered text
     :ref:`Links to 3rd Section of Getting Started<The Third Section of Getting Started>` using custom link and sphinx autosectionlabel
 
 **Using autosectionlabel to link to target in other document**
+
 reStructuredText
+
 .. note::
     :ref:`header1` intended behavior is linking to header target in show_host_info comments
 
@@ -35,7 +43,9 @@ rendered text
     :ref:`header1` intended behavior is linking to header target in show_host_info comments
 
 **Using autosectionlabel with custom link for function in other document**
+
 reStructuredText
+
 .. note::
     :ref:`Second header custom2<header2>` intended behavior is linking to header target in show_host_info comments
 
@@ -43,7 +53,9 @@ rendered text
     :ref:`Second header custom2<header2>` intended behavior is linking to header target in show_host_info comments
 
 **Use :py domain to link to argument in python module**
+
 reStructuredText
+
 .. note::
     :py:meth:`get_argument_parser()<show_host_info.get_argument_parser>`
 
@@ -51,7 +63,9 @@ rendered text
     :py:meth:`get_argument_parser()<show_host_info.get_argument_parser>`
 
 **Use :py domain to python module**
+
 reStructuredText
+
 .. note::
     See the :py:mod:`show_host_info` script.
 
