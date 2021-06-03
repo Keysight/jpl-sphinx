@@ -1,7 +1,10 @@
 
 Link Testing Playground
 =======================
+.. code-block:: RST
 
+  .. code-block:: RST
+  
 **Using :ref: keyword in autosectionlabel**
 
 reStructuredText
@@ -47,6 +50,7 @@ rendered text
 reStructuredText
 
 .. code-block:: 
+
     :ref:`Second header custom2<header2>` intended behavior is linking to header target in show_host_info comments
 
 rendered text
