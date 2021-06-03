@@ -18,6 +18,8 @@ sys.path.insert(0, os.path.abspath(os.path.join('..', 'resources', 'scripts')))
 project = 'JPL-Sphinx'
 copyright = '2021, Keysight Technologies'
 author = 'Keysight Labs DevOps Team'
+pygments_style = 'sphinx'
+
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'
@@ -31,7 +33,8 @@ release = '1.0.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinxarg.ext',
-    'sphinx.ext.autosectionlabel'
+    'sphinx.ext.autosectionlabel',
+    
 ]
 
 # Add any paths that contain templates here, relative to this directory.
