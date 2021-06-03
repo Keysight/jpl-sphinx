@@ -6,7 +6,7 @@ Link Testing Playground
 
 reStructuredText
 
-.. note::
+.. code-block:: RST
     :ref:`The Second Section of Getting Started` This link indicates that the autosectionlabel extension in conf.py is working
 
 rendered text
@@ -16,7 +16,7 @@ rendered text
 
 reStructuredText
 
-.. note::
+.. code-block:: RST
     target1_ should link to Second Section of Getting Started using implicit hyperlinking (is feature of restructure text, not sphinx autosectionlabel) if target1 is correctly defined in the second section
 
 rendered text
@@ -26,7 +26,7 @@ rendered text
 
 reStructuredText
 
-.. note::
+.. code-block:: RST
     :ref:`Links to 3rd Section of Getting Started<The Third Section of Getting Started>` using custom link and sphinx autosectionlabel
 
 rendered text
@@ -36,7 +36,7 @@ rendered text
 
 reStructuredText
 
-.. note::
+.. code-block:: RST
     :ref:`header1` intended behavior is linking to header target in show_host_info comments
 
 rendered text
@@ -46,7 +46,7 @@ rendered text
 
 reStructuredText
 
-.. note::
+.. code-block:: RST
     :ref:`Second header custom2<header2>` intended behavior is linking to header target in show_host_info comments
 
 rendered text
@@ -56,7 +56,7 @@ rendered text
 
 reStructuredText
 
-.. note::
+.. code-block:: RST
     :py:meth:`get_argument_parser()<show_host_info.get_argument_parser>`
 
 rendered text
@@ -66,7 +66,7 @@ rendered text
 
 reStructuredText
 
-.. note::
+.. code-block:: RST
     See the :py:mod:`show_host_info` script.
 
 rendered text
