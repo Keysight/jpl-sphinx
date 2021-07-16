@@ -6,9 +6,7 @@ show_host_info.py
 
 Introduction
 ------------
-This is the documenation for the script in reStructuredText format.
-
-This is a change **see me**.
+This is the documentation for the script in reStructuredText format.
 
 Usage:
 ------
@@ -50,6 +48,22 @@ def get_argument_parser():
 
     return argument_parser
 
+def fibonacci(n):
+    """ Function for nth fibonacci, space optimized"""
+    a = 0
+    b = 1
+    if n < 0:
+        print("Incorrect input")
+    elif n == 0:
+        return 0
+    elif n == 1:
+        return b
+    else:
+        for i in range(1, n):
+            c = a + b
+            a = b
+            b = c
+        return b
 
 def get_parsed_arguments(test_args=None):
     """Get the parsed arguments"""
