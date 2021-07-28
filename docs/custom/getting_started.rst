@@ -1,9 +1,6 @@
 
 Link Testing Playground
 =======================
-.. code-block:: RST
-
-  .. code-block:: RST
 
 **Using :ref: keyword in autosectionlabel**
 
