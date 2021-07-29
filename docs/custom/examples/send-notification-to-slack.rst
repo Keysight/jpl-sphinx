@@ -139,6 +139,7 @@ the configuration into dozens of jenkinsfiles. Here, are two custom steps for Sl
 respectively: 
 
 *InsertTeamSlack.groovy*: 
+
 .. code-block:: groovy
 
   def call(Map config = [:])
@@ -156,8 +157,9 @@ respectively:
       return config
   }
 
-  *InsertDefaultEmailRecipients.groovy*:
-.. code-block:: groovy
+*InsertDefaultEmailRecipients.groovy*:
+
+  .. code-block:: groovy
 
     def call(Map config=[:])
     {
@@ -240,13 +242,6 @@ Configurations
 In Slack, a message can be sent to a channel or a person. For a channel, 
 use the syntax `'channel':#proj-kosi-pipeline-library-qa-messages'` and for
 a user, use their member ID `'channel':'U0238VB96L9'`.
-.. .. code-block:: groovy
-    
-..     def config = [
-..         'slack':[
-..             'channel':'#proj-kosi-pipeline-library-qa-messages',
-..         ]
-..     ]
 
 In email, us the syntax `'to':['pdl-kosipipeline-admin@keysight.com']`, and  
 multiple emails can be added to the array.
@@ -256,14 +251,14 @@ multiple emails can be added to the array.
 These are the supported notification policies, i.e. the string values that 
 are expected for `config.email.sendPolicy` and `config.slack.sendPolicy`.
 
-`'always'`: With this policy, this step will always return **true**.
+**`'always'`**: With this policy, this step will always return **true**.
 
-`'never'`: With this policy, this step will always return **false**.
+**`'never'`**: With this policy, this step will always return **false**.
 
-`'onFail'`: With this policy, this step will return **true** if the currentBuild.result is **FAILURE** or **UNSTABLE**. These are evaluated by the step JobHasFailed
+**`'onFail'`**: With this policy, this step will return **true** if the currentBuild.result is **FAILURE** or **UNSTABLE**. These are evaluated by the step JobHasFailed
 
-`'onFailOrFirstSuccess'`: This is the default policy. With this policy, this step will return **true** if the job has failed. It will also return true if the previous run failed according to JobHasFailed or does not exist and the present job did not fail.
+**`'onFailOrFirstSuccess'`**: This is the default policy. With this policy, this step will return **true** if the job has failed. It will also return true if the previous run failed according to JobHasFailed or does not exist and the present job did not fail.
 
-`'onFailOrStateChange'`: With this policy, this step will return **true** if the job has failed. It will also return **true** if the value in currentBuild.result of the previous run is different from the currentBuild.result of the present run.
+**`'onFailOrStateChange'`**: With this policy, this step will return **true** if the job has failed. It will also return **true** if the value in currentBuild.result of the previous run is different from the currentBuild.result of the present run.
 
 
