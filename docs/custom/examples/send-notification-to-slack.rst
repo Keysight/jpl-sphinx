@@ -62,8 +62,9 @@ Say, we are developing our pipeline in *my-jenkinsfile.groovy*, which currently 
 
 To add the capability of sending notifications, we first add a key-value pair 
 in the *config* map (the key is the communication channel, and the value 
-is the receiver and sendPolicy), and then we rely on *SendCommitMessageToSlackViaJava* from 
-the shared pipeline. Here is the new *my-jenkinsfile.groovy* 
+is the receiver and sendPolicy). See :ref:`Configurations` for information
+on how to define this pairing. Then we rely on *SendCommitMessageToSlackViaJava* from 
+the shared pipeline to send the message. Here is the new *my-jenkinsfile.groovy* 
 
 .. code-block:: groovy
 
@@ -117,8 +118,7 @@ the shared pipeline. Here is the new *my-jenkinsfile.groovy*
           }
       }
   }
-Here, the key-value pair is hard-coded into config. See :ref:`Configurations` for information
-on how to define this pairing.
+Now, the key-value pair is hard-coded into config.
 In order to avoid hard-coding, see :ref:`Using a custom configuration step`.
 
 Using a custom configuration step
@@ -142,31 +142,31 @@ respectively:
 
 .. code-block:: groovy
 
-  def call(Map config = [:])
-  {
-      def slackChannel = '#proj-trustforge-builds'
-      if( !config.slack  )
-      {
-          config.slack = ['channel':slackChannel]
-      }
-      else if( !config.slack.channel)
-      {
-          config.slack.channel = slackChannel
-      } 
-  
-      return config
-  }
+    def call(Map config = [:])
+    {
+        def slackChannel = '#proj-trustforge-builds'
+        if( !config.slack  )
+        {
+            config.slack = ['channel':slackChannel]
+        }
+        else if( !config.slack.channel)
+        {
+            config.slack.channel = slackChannel
+        } 
+
+        return config
+    }
 
 *InsertDefaultEmailRecipients.groovy*:
 
-  .. code-block:: groovy
+.. code-block:: groovy
 
     def call(Map config=[:])
     {
         def emailToList = ['scott_selberg@keysight.com']
         emailToList.add('chris_grove@keysight.com')
         emailToList.addAll(['chris_hales@keysight.com'])
-    
+
         if(!config?.email)
         {
             config.email = ['to':emailToList]
@@ -175,7 +175,7 @@ respectively:
         {
             config.email.to = emailToList
         }
-    
+
         return config
     }
 
@@ -236,6 +236,27 @@ Here is an updated *my-jenkinsfile.groovy* that utilies these steps:
 
 Configurations
 =========================
+Example configuration for Slack:
+
+.. code-block:: groovy
+
+    def config = [
+        'slack':[
+            'channel':'#proj-kosi-pipeline-library-qa-messages',
+            'sendPolicy':'onFailOrFirstSuccess'
+        ]
+    ]
+
+Example configuration for email:
+
+.. code-block:: groovy
+
+    def config = [
+        'email':[
+            'to':['pdl-kosipipeline-admin@keysight.com'],
+            'sendPolicy':'onFailOrFirstSuccess'
+        ]
+    ]
 
 **Message Destination**
 
