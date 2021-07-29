@@ -268,7 +268,8 @@ a user, use their member ID `'channel' : 'U0238VB96L9'`.
 In email, us the syntax `'to' : ['pdl-kosipipeline-admin@keysight.com']`, and  
 multiple emails can be added to the array.
 
-**Controlling when messages are sent with `sendPolicy`**
+**Controlling when messages are sent with 'sendPolicy'
+**
 
 These are the supported notification policies, i.e. the string values that 
 are expected for `config.email.sendPolicy` and `config.slack.sendPolicy`.
