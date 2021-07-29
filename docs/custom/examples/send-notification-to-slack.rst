@@ -20,6 +20,7 @@ A Simple Example
 Say, we are developing our pipeline in *my-jenkinsfile.groovy*, which currently does nothing:
 
 .. code-block:: groovy
+    :caption: my-jenkinsfile.groovy
 
   // groovylint-disable BracesForMethod,BracesForTryCatchFinally,BracesForIfElse
   // groovylint-disable MethodName,VariableName,ImplementationAsType
@@ -64,10 +65,10 @@ To add the capability of sending notifications, we first add a key-value pair
 in the *config* map (the key is the communication channel, and the value 
 is the receiver and sendPolicy). See :ref:`Configurations` for information
 on how to define this pairing. Then we rely on *SendCommitMessageToSlackViaJava* from 
-the shared pipeline to send the message. Here is the new *my-jenkinsfile.groovy* 
+the shared keysight pipeline library to send the message. Here is the new *my-jenkinsfile.groovy* 
 
 .. code-block:: groovy
-
+    :caption: my-jenkinsfile.groovy
   // groovylint-disable BracesForMethod,BracesForTryCatchFinally,BracesForIfElse
   // groovylint-disable MethodName,VariableName,ImplementationAsType
   @Library('Keysight Pipeline Library') _
@@ -138,9 +139,8 @@ where the library is owned by a specific team, and allows us to avoid hard-codin
 the configuration into dozens of jenkinsfiles. Here, are two custom steps for Slack and email, 
 respectively: 
 
-*InsertTeamSlack.groovy*: 
-
 .. code-block:: groovy
+    :caption: InsertTeamSlack.groovy
 
     def call(Map config = [:])
     {
@@ -157,9 +157,8 @@ respectively:
         return config
     }
 
-*InsertDefaultEmailRecipients.groovy*:
-
 .. code-block:: groovy
+    :caption: InsertDefaultEmailRecipients.groovy
 
     def call(Map config=[:])
     {
@@ -180,9 +179,11 @@ respectively:
     }
 
 Additionally, a separate finalization step is often used to make the pipeline more simple. 
-Here is an example of a usable *TeamFinalizeJob.groovy*:
+Here is an example of a usable step, located in a separate file:
+.. where is this file?
 
 .. code-block:: groovy
+    :caption: TeamFinalizeJob.groovy
     def call(Map config=[:])
     {
         SendCommitMessageToSlackViaJava(config)
@@ -190,9 +191,10 @@ Here is an example of a usable *TeamFinalizeJob.groovy*:
         FinalizeWorkspace(config)
     }
 
-Here is an updated *my-jenkinsfile.groovy* that utilies these steps:
+Here is an updated *my-jenkinsfile.groovy* that utilizes these steps:
 
 .. code-block:: groovy
+    :caption: my-jenkinsfile.groovy
 
   // groovylint-disable BracesForMethod,BracesForTryCatchFinally,BracesForIfElse
   // groovylint-disable MethodName,VariableName,ImplementationAsType
@@ -236,9 +238,9 @@ Here is an updated *my-jenkinsfile.groovy* that utilies these steps:
 
 Configurations
 =========================
-Example configuration for Slack:
 
 .. code-block:: groovy
+    :caption: Example configuration for Slack
 
     def config = [
         'slack':[
@@ -247,9 +249,8 @@ Example configuration for Slack:
         ]
     ]
 
-Example configuration for email:
-
 .. code-block:: groovy
+    :caption: Example configuration for email
 
     def config = [
         'email':[
@@ -261,10 +262,10 @@ Example configuration for email:
 **Message Destination**
 
 In Slack, a message can be sent to a channel or a person. For a channel, 
-use the syntax `'channel':#proj-kosi-pipeline-library-qa-messages'` and for
-a user, use their member ID `'channel':'U0238VB96L9'`.
+use the syntax `'channel' : #proj-kosi-pipeline-library-qa-messages'` and for
+a user, use their member ID `'channel' : 'U0238VB96L9'`.
 
-In email, us the syntax `'to':['pdl-kosipipeline-admin@keysight.com']`, and  
+In email, us the syntax `'to' : ['pdl-kosipipeline-admin@keysight.com']`, and  
 multiple emails can be added to the array.
 
 **Controlling when messages are sent with `sendPolicy`**
@@ -272,14 +273,14 @@ multiple emails can be added to the array.
 These are the supported notification policies, i.e. the string values that 
 are expected for `config.email.sendPolicy` and `config.slack.sendPolicy`.
 
-**`'always'`**: With this policy, this step will always return **true**.
+`'always'`: Step returns **true**; message always sent
 
-**`'never'`**: With this policy, this step will always return **false**.
+`'never'`: Step returns **false**; message never sent
 
-**`'onFail'`**: With this policy, this step will return **true** if the currentBuild.result is **FAILURE** or **UNSTABLE**. These are evaluated by the step JobHasFailed
+`'onFail'`: Step returns **true** if the currentBuild.result is **FAILURE** or **UNSTABLE**. These are evaluated by the step JobHasFailed. Sends message on build failure.
 
-**`'onFailOrFirstSuccess'`**: This is the default policy. With this policy, this step will return **true** if the job has failed. It will also return true if the previous run failed according to JobHasFailed or does not exist and the present job did not fail.
+`'onFailOrFirstSuccess'`: This is the default policy. Step returns **true** if the job has failed, or if the previous run failed according to JobHasFailed, or if the present job is new.
 
-**`'onFailOrStateChange'`**: With this policy, this step will return **true** if the job has failed. It will also return **true** if the value in currentBuild.result of the previous run is different from the currentBuild.result of the present run.
+`'onFailOrStateChange'`: Step returns **true** if the job has failed. Returns **true** if the value in currentBuild.result of the previous run is different from the currentBuild.result of the present run.
 
 
