@@ -78,6 +78,11 @@ the shared pipeline. Here is the new *my-jenkinsfile.groovy*
         'sendPolicy':'onFailOrFirstSuccess'
         ]
     ]
+    //for email,  use the commented lines
+    //'email':[
+    //    'to':['pdl-kosipipeline-admin@keysight.com'],
+    //    'sendPolicy':'onFailOrFirstSuccess'
+    //]
 
   if(!config.agentLabel)
   {
@@ -107,19 +112,33 @@ the shared pipeline. Here is the new *my-jenkinsfile.groovy*
           always 
           {
               SendCommitMessageToSlackViaJava(config)
+              //SendCommitEmailMessageViaJava(config)
               FinalizeJobWithoutClean(config)
           }
       }
   }
-Here, the key-value pair is hard-coded into config. In order to avoid hard-coding, see below.
+Here, the key-value pair is hard-coded into config. See :ref:`Configurations` for information
+on how to define this pairing.
+In order to avoid hard-coding, see :ref:`Using a custom configuration step`.
 
 Using a custom configuration step
 =========================
+
+.. warning::
+    While most of the code in the jenkinsfiles is showing usage of the KOSi 
+    Pipeline Library, the agent labels are specific to the setup of the 
+    Jenkins Manager and will likely need to be adjusted. The documentation 
+    uses the standard labels **any**, **none**, **windows**, **linux**, and 
+    **mac**. For the moab environment one can use **windows**, **rhl-node10** 
+    and **mac-node10**.
+
 Alternatively, we can insert the configurations by defining a custom groovy step using 
 the *call()* function in a new file. This pattern is common in environments
 where the library is owned by a specific team, and allows us to avoid hard-coding 
-the configuration into dozens of jenkinsfiles. Here, the custom step is defined in *InsertTeamSlack.groovy*:
+the configuration into dozens of jenkinsfiles. Here, are two custom steps for Slack and email, 
+respectively: 
 
+*InsertTeamSlack.groovy*: 
 .. code-block:: groovy
 
   def call(Map config = [:])
@@ -137,8 +156,29 @@ the configuration into dozens of jenkinsfiles. Here, the custom step is defined 
       return config
   }
 
+  *InsertDefaultEmailRecipients.groovy*:
+.. code-block:: groovy
+
+    def call(Map config=[:])
+    {
+        def emailToList = ['scott_selberg@keysight.com']
+        emailToList.add('chris_grove@keysight.com')
+        emailToList.addAll(['chris_hales@keysight.com'])
+    
+        if(!config?.email)
+        {
+            config.email = ['to':emailToList]
+        }
+        else if(!config?.email?.to)
+        {
+            config.email.to = emailToList
+        }
+    
+        return config
+    }
+
 Additionally, a separate finalization step is often used to make the pipeline more simple. 
-Here is an example of a usable *TeamFinalizeJob.groovy*:\
+Here is an example of a usable *TeamFinalizeJob.groovy*:
 
 .. code-block:: groovy
     def call(Map config=[:])
@@ -158,6 +198,7 @@ Here is an updated *my-jenkinsfile.groovy* that utilies these steps:
   LoadRequiredLibrariesForGeneralWorkflows()
 
   config = InsertTeamSlackChannel(config)
+  config = InsertDefaultEmailRecipients(config)
 
   if(!config.agentLabel)
   {
@@ -186,8 +227,7 @@ Here is an updated *my-jenkinsfile.groovy* that utilies these steps:
       {
           always 
           {
-              SendCommitMessageToSlackViaJava(config)
-              FinalizeJobWithoutClean(config)
+          TeamFinalizeJob(config)
           }
       }
   }
@@ -195,10 +235,35 @@ Here is an updated *my-jenkinsfile.groovy* that utilies these steps:
 Configurations
 =========================
 
-.. warning::
-    While most of the code in the jenkinsfiles is showing usage of the KOSi 
-    Pipeline Library, the agent labels are specific to the setup of the 
-    Jenkins Manager and will likely need to be adjusted. The documentation 
-    uses the standard labels **any**, **none**, **windows**, **linux**, and 
-    **mac**. For the moab environment one can use **windows**, **rhl-node10** 
-    and **mac-node10**.
+**Message Destination**
+
+In Slack, a message can be sent to a channel or a person. For a channel, 
+use the syntax `'channel':#proj-kosi-pipeline-library-qa-messages'` and for
+a user, use their member ID `'channel':'U0238VB96L9'`.
+.. .. code-block:: groovy
+    
+..     def config = [
+..         'slack':[
+..             'channel':'#proj-kosi-pipeline-library-qa-messages',
+..         ]
+..     ]
+
+In email, us the syntax `'to':['pdl-kosipipeline-admin@keysight.com']`, and  
+multiple emails can be added to the array.
+
+**Controlling when messages are sent with `sendPolicy`**
+
+These are the supported notification policies, i.e. the string values that 
+are expected for `config.email.sendPolicy` and `config.slack.sendPolicy`.
+
+`'always'`: With this policy, this step will always return **true**.
+
+`'never'`: With this policy, this step will always return **false**.
+
+`'onFail'`: With this policy, this step will return **true** if the currentBuild.result is **FAILURE** or **UNSTABLE**. These are evaluated by the step JobHasFailed
+
+`'onFailOrFirstSuccess'`: This is the default policy. With this policy, this step will return **true** if the job has failed. It will also return true if the previous run failed according to JobHasFailed or does not exist and the present job did not fail.
+
+`'onFailOrStateChange'`: With this policy, this step will return **true** if the job has failed. It will also return **true** if the value in currentBuild.result of the previous run is different from the currentBuild.result of the present run.
+
+
