@@ -22,44 +22,44 @@ Say, we are developing our pipeline in *my-jenkinsfile.groovy*, which currently 
 .. code-block:: groovy
     :caption: my-jenkinsfile.groovy
 
-  // groovylint-disable BracesForMethod,BracesForTryCatchFinally,BracesForIfElse
-  // groovylint-disable MethodName,VariableName,ImplementationAsType
-  @Library('Keysight Pipeline Library') _
-  LoadRequiredLibrariesForGeneralWorkflows()
+    // groovylint-disable BracesForMethod,BracesForTryCatchFinally,BracesForIfElse
+    // groovylint-disable MethodName,VariableName,ImplementationAsType
+    @Library('Keysight Pipeline Library') _
+    LoadRequiredLibrariesForGeneralWorkflows()
 
-  Map config = [:]
+    Map config = [:]
 
-  if(!config.agentLabel)
-  {
-      config.agentLabel = 'windows'
-  }
+    if(!config.agentLabel)
+    {
+        config.agentLabel = 'windows'
+    }
 
-  pipeline
-  {
-      agent
-      {
-          label config.agentLabel
-      }
+    pipeline
+    {
+        agent
+        {
+            label config.agentLabel
+        }
 
-      stages
-      {
-          stage("Do Nothing")
-          {
-              steps
-              {
-                  echo "Do Nothing"
-              }
-          }
-      }       
+        stages
+        {
+            stage("Do Nothing")
+            {
+                steps
+                {
+                    echo "Do Nothing"
+                }
+            }
+        }       
 
-      post
-      {
-          always 
-          {
-              FinalizeJobWithoutClean(config)
-          }
-      }
-  }
+        post
+        {
+            always 
+            {
+                FinalizeJobWithoutClean(config)
+            }
+        }
+    }
 
 To add the capability of sending notifications, we first add a key-value pair 
 in the *config* map (the key is the communication channel, and the value 
@@ -69,12 +69,13 @@ the shared keysight pipeline library to send the message. Here is the new *my-je
 
 .. code-block:: groovy
     :caption: my-jenkinsfile.groovy
-  // groovylint-disable BracesForMethod,BracesForTryCatchFinally,BracesForIfElse
-  // groovylint-disable MethodName,VariableName,ImplementationAsType
-  @Library('Keysight Pipeline Library') _
-  LoadRequiredLibrariesForGeneralWorkflows()
 
-  def config = [
+    // groovylint-disable BracesForMethod,BracesForTryCatchFinally,BracesForIfElse
+    // groovylint-disable MethodName,VariableName,ImplementationAsType
+    @Library('Keysight Pipeline Library') _
+    LoadRequiredLibrariesForGeneralWorkflows()
+
+    def config = [
     'slack':[
         'channel':'#proj-kosi-pipeline-library-qa-messages',
         'sendPolicy':'onFailOrFirstSuccess'
@@ -86,39 +87,39 @@ the shared keysight pipeline library to send the message. Here is the new *my-je
     //    'sendPolicy':'onFailOrFirstSuccess'
     //]
 
-  if(!config.agentLabel)
-  {
-      config.agentLabel = 'windows'
-  }
+    if(!config.agentLabel)
+    {
+        config.agentLabel = 'windows'
+    }
 
-  pipeline
-  {
-      agent
-      {
-          label config.agentLabel
-      }
+    pipeline
+    {
+        agent
+        {
+            label config.agentLabel
+        }
 
-      stages
-      {
-          stage("Do Nothing")
-          {
-              steps
-              {
-                  echo "Do Nothing"
-              }
-          }
-      }       
+        stages
+        {
+            stage("Do Nothing")
+            {
+                steps
+                {
+                    echo "Do Nothing"
+                }
+            }
+        }       
 
-      post
-      {
-          always 
-          {
-              SendCommitMessageToSlackViaJava(config)
-              //SendCommitEmailMessageViaJava(config)
-              FinalizeJobWithoutClean(config)
-          }
-      }
-  }
+        post
+        {
+            always 
+            {
+                SendCommitMessageToSlackViaJava(config)
+                //SendCommitEmailMessageViaJava(config)
+                FinalizeJobWithoutClean(config)
+            }
+        }
+    }
 Now, the key-value pair is hard-coded into config.
 In order to avoid hard-coding, see :ref:`Using a custom configuration step`.
 
