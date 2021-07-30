@@ -29,13 +29,10 @@ is configured to be https://jenkins.keysight.com, then we want to create a
 text file called "jenkins.libconfig.yml.
 
 Below is a sample jenkins instance configuration file. It should not be
-considered an authoratative reference. In the configuration map initialization process, 
+considered an authoritative reference. In the configuration map initialization process, 
 the imported libraries initialize the contents, the jenkins instance configuration inserts 
-or overrides values, and the process merges in the values form the jenkinsfile
-the contents are
-initalized by the imported libraries, values are inserted or overridden by the
-jenkins instance configuration and finally values are merged in from the
-jenkinsfile.
+or overrides values, and the process merges in the values from the jenkinsfile
+the contents.
 
 .. code-block:: yaml
   :caption: jenkins.libconfig.yml
