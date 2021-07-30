@@ -79,7 +79,7 @@ Adding the approle credentials to Jenkins
 In the Jenkins credential manager, create two secret text credentials:
 the approle role-id and the secret-id. The default configuration for
 the pipeline library expects the credentials in Jenkins to have the following ids.
-.. What is the Jenkins credential manager, place an example of the ids in here
+
 
 * vault-jenkins-approle-role-id
 * vault-jenkins-approle-secret-id

@@ -2,12 +2,12 @@
 Jenkins Instance Configuration File
 ===================================
 
-The Keysight Pipeline Library needs to have a git repository that contains
+The **Keysight Pipeline Library** is a small loading library that allows a team
+to create steps that load the libraries required for their specific workflows.
+The library needs to have a git repository that contains
 a configuration file for the library. This is typically created and owned
 by the administrator of the Jenkins instance. The bare minimum setup for
-the repo is shown below; however, is it not uncommon to fork the **Keysight
-Pipeline Library** which is a small loading library and allows the team
-to create steps that load the libraries required for their specific workflows.
+the repo is shown below.
 
 .. code-block:: none
 
@@ -19,23 +19,26 @@ to create steps that load the libraries required for their specific workflows.
 
 .. note::
 
-  Normally, a KPL Sibling library would have a **docs** folder.  This may be
-  helpful, but often *loading* and *configuration* libraries are so simple that
-  the readme.md file is sufficent.
+  Normally, a KPL Sibling library would have a **docs** folder for documentation.
+  This may be helpful, but often *loading* and *configuration* libraries are simple enough
+  for a readme.md file to be sufficent.
 
 The text ${jenkins-instance-name} should be replace the hostname part of the
 Jenkins URL in the general configuration.  For example, if the Jenkins instance
 is configured to be https://jenkins.keysight.com, then we want to create a
 text file called "jenkins.libconfig.yml.
 
-Below is a sample jenkins instance configuration file; however, it should not be
-considered an authoratative reference for what the configuation file should look
-like. In the configuation map initialization process, the contents are
+Below is a sample jenkins instance configuration file. It should not be
+considered an authoratative reference. In the configuration map initialization process, 
+the imported libraries initialize the contents, the jenkins instance configuration inserts 
+or overrides values, and the process merges in the values form the jenkinsfile
+the contents are
 initalized by the imported libraries, values are inserted or overridden by the
 jenkins instance configuration and finally values are merged in from the
 jenkinsfile.
 
 .. code-block:: yaml
+  :caption: jenkins.libconfig.yml
 
    artifactory:
        repo: generic-local-team-keysight
